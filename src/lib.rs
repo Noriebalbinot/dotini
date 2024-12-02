@@ -1,6 +1,7 @@
 use std::{collections::HashMap, path::Path};
 
 pub mod file;
+pub mod getters_and_setters;
 
 #[derive(Clone)]
 pub struct DotIni<'a> {

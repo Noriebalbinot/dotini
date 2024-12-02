@@ -1,4 +1,4 @@
-use std::{collections::HashMap, error::Error, fs, io::Read, path::Path};
+use std::{collections::HashMap, error::Error, fs, io::Read};
 
 use crate::DotIni;
 
@@ -47,6 +47,8 @@ impl<'a> DotIni<'a> {
 
 #[cfg(test)]
 mod tests {
+    use std::path::Path;
+
     use super::*;
 
     #[test]
