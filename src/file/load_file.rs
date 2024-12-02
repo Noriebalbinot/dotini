@@ -2,10 +2,10 @@ use std::{collections::HashMap, error::Error, fs, io::Read, path::Path};
 
 use crate::DotIni;
 
-impl DotIni {
-    pub fn load_file(mut self, file: &Path) -> Result<DotIni, Box<dyn Error + Send + Sync>> {
+impl<'a> DotIni<'a> {
+    pub fn load_file(mut self) -> Result<DotIni<'a>, Box<dyn Error + Send + Sync>> {
         let mut buf: String = String::default();
-        fs::File::open(file)?.read_to_string(&mut buf)?;
+        fs::File::open(self.path)?.read_to_string(&mut buf)?;
         let mut act_section = String::default();
         for i in buf.split("\n") {
             if i.starts_with("[") {
@@ -51,8 +51,8 @@ mod tests {
 
     #[test]
     fn test_load_file() {
-        let dotini = DotIni::new();
+        let dotini = DotIni::new(Path::new("test.ini"));
 
-        assert!(dotini.load_file(Path::new("test.ini")).is_ok())
+        assert!(dotini.load_file().is_ok())
     }
 }
