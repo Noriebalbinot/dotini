@@ -29,7 +29,11 @@ mod tests {
     fn test_save_to_file() {
         let mut ini = DotIni::new(Path::new("test.ini")).load_file().unwrap();
 
-        ini.inner.insert(String::from("test"), HashMap::new());
+        let ini = ini.set_property(
+            String::from("test"),
+            String::from("a"),
+            String::from("test"),
+        );
 
         assert!(ini.save_to_file().is_ok());
     }
